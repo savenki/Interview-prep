@@ -1,0 +1,22 @@
+<div class="tabs">
+  <button class="btn btn-info" [class.active]="activeTabs === 'Home'" (click)="setTabs('Home')">Home</button>
+  <button class="btn btn-info" [class.active]="activeTabs === 'Profile'" (click)="setTabs('Profile')">Profile</button>
+  <button class="btn btn-info" [class.active]="activeTabs === 'Settings'" (click)="setTabs('Settings')">Settings</button>
+</div>
+
+<ng-container *ngTemplateOutlet="activeTemplate"></ng-container>
+
+<ng-template #homeContent>
+  <h2 appColorchanger>Employee Details</h2>
+  <app-employees></app-employees>
+</ng-template>
+
+<ng-template #profileContent>
+  <h1>Welcome To Profile</h1>
+  <app-registration></app-registration>
+</ng-template>
+
+<ng-template #settingsContent>
+  <h1>Welcome Setting</h1>
+  <p>This is Setting Content</p>
+</ng-template>
