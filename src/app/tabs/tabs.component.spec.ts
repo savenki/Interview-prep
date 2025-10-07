@@ -7,6 +7,7 @@ import { SkillBadgePipe } from '../skill-badge.pipe';
 import { ColorchangerDirective } from '../colorchanger.directive';
 import { RegistrationComponent } from '../registration/registration.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from '../footer/footer.component';
 
 describe('TabsComponent', () => {
   let component: TabsComponent;
@@ -15,7 +16,7 @@ describe('TabsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TabsComponent,EmployeesComponent, // ✅ Declare it here
-        SkillBadgePipe, ColorchangerDirective, RegistrationComponent ],
+        SkillBadgePipe, ColorchangerDirective, RegistrationComponent,  FooterComponent],
         imports: [ReactiveFormsModule, FormsModule]
     });
     fixture = TestBed.createComponent(TabsComponent);
