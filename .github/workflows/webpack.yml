@@ -31,6 +31,9 @@ jobs:
     - name: Install Angular CLI
       run: npm install -g @angular/cli
 
+    - name: Install Karma Chrome Launcher
+      run: npm install --save-dev karma-chrome-launcher
+      
     - name: Run tests
       run: |
         if npm run test --if-present; then
