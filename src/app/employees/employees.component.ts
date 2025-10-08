@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { employeeDetails } from '../models/employeDetails';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employees',
@@ -10,30 +8,19 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class EmployeesComponent {
   employeList = employeeDetails;
-  filteredEmployeeList = [...employeeDetails];
-  searchTerm: string = ''; 
+  searchTerm = signal('');
 
-  private searchSubject = new Subject<string>();
-
-  constructor() {
-    this.searchSubject.pipe(
-      debounceTime(300)
-    ).subscribe(searchTerm => {
-      this.filterEmployee(searchTerm);
-    });
-  }
-
-  onSearchChange(value: string) {
-    this.searchSubject.next(value);
-  }
-
-  filterEmployee(value: string) {
-    const searchTerm = value.trim().toLowerCase();
-    this.filteredEmployeeList = searchTerm
+  filteredEmployeeList = computed(() => {
+    const term = this.searchTerm().trim().toLowerCase();
+    return term
       ? this.employeList.filter(emp =>
-          emp.name.toLowerCase().includes(searchTerm) ||
-          emp.skill.toLowerCase().includes(searchTerm)
+          emp.name.toLowerCase().includes(term) ||
+          emp.skill.toLowerCase().includes(term)
         )
       : [...this.employeList];
+  });
+
+  onSearchChange(event: any) {
+    this.searchTerm.set(event.target.value);
   }
 }

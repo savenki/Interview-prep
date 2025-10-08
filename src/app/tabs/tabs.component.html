@@ -1,25 +1,38 @@
-
 <div class="tabs">
- 
-  <button class="btn btn-info" [class.active]="activeTabs === 'Home'" (click)="setTabs('Home')">Home</button>
-  <button class="btn btn-info" [class.active]="activeTabs === 'Profile'" (click)="setTabs('Profile')">Profile</button>
-  <button class="btn btn-info" [class.active]="activeTabs === 'Settings'" (click)="setTabs('Settings')">Settings</button>
+  @for (tab of ['Home', 'Profile', 'Settings']; track tab) {
+    <button
+      class="btn btn-info"
+      [class.active]="activeTabs() === tab"
+      (click)="activeTabs.set(tab)"
+    >
+      {{ tab }}
+    </button>
+  }
 </div>
-<ng-container *ngTemplateOutlet="activeTemplate"></ng-container>
 
-<ng-template #homeContent>
-  <h2 appColorchanger>Employee Details</h2>
-  <app-employees></app-employees>
-</ng-template>
-
-<ng-template #profileContent>
-  <h1>Welcome To Profile</h1>
-  <app-registration></app-registration>
-</ng-template>
-
-<ng-template #settingsContent>
-  <h1>Welcome Setting</h1>
-  <p>This is Setting Content</p>
-</ng-template>
-
-
+@switch (activeTabs()) {
+  @case ('Home') {
+    @defer(on viewport; on timer(5s)) {
+      <h2 appColorchanger>Employee Details</h2>
+      <app-employees></app-employees>
+    }
+    @placeholder {
+      <h2 appColorchanger>Employee Details</h2>
+    }
+  }
+  @case ('Profile') {
+    @defer (on idle) {
+      <h1>Welcome To Profile</h1>
+      <app-registration></app-registration>
+    }
+  }
+  @case ('Settings') {
+    @defer (on viewport; on timer(5s)) {
+      <h1>Welcome Setting</h1>
+      <p>This is Setting Content</p>
+    }
+    @placeholder {
+      <h1>Welcome Setting</h1>
+    }
+  }
+}
