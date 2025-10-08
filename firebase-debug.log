@@ -1,0 +1,39 @@
+[debug] [2025-10-07T13:17:27.856Z] ----------------------------------------------------------------------
+[debug] [2025-10-07T13:17:27.859Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\atmvenka\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js login --reauth
+[debug] [2025-10-07T13:17:27.859Z] CLI Version:   14.18.0
+[debug] [2025-10-07T13:17:27.860Z] Platform:      win32
+[debug] [2025-10-07T13:17:27.860Z] Node Version:  v23.10.0
+[debug] [2025-10-07T13:17:27.860Z] Time:          Tue Oct 07 2025 18:47:27 GMT+0530 (India Standard Time)
+[debug] [2025-10-07T13:17:27.860Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=764745125&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2025-10-07T13:17:38.694Z] >>> [apiv2][query] POST https://accounts.google.com/o/oauth2/token [none]
+[debug] [2025-10-07T13:17:38.695Z] >>> [apiv2][body] POST https://accounts.google.com/o/oauth2/token [omitted]
+[debug] [2025-10-07T13:17:38.986Z] *** [apiv2] error from fetch(https://accounts.google.com/o/oauth2/token, {"headers":{},"method":"POST","body":{"_overheadLength":543,"_valueLength":208,"_valuesToMeasure":[],"writable":false,"readable":true,"dataSize":0,"maxDataSize":2097152,"pauseStreams":true,"_released":true,"_streams":[],"_currentStream":null,"_insideLoop":false,"_pendingNext":false,"_boundary":"--------------------------93d5e9cad85747948023ec8b","_events":{},"_eventsCount":1}}): FetchError: request to https://accounts.google.com/o/oauth2/token failed, reason: unable to get local issuer certificate
+[debug] [2025-10-07T13:17:38.987Z] Token Fetch Error: FirebaseError: Failed to make request to https://accounts.google.com/o/oauth2/token
+    at RetryOperation._fn (C:\Users\atmvenka\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:261:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[error] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2025-10-07T13:17:38.992Z] >>> [apiv2][query] POST https://auth.firebase.tools/attest [none]
+[debug] [2025-10-07T13:17:38.993Z] >>> [apiv2][body] POST https://auth.firebase.tools/attest {"session_id":"c34c97bb-6588-4920-933f-9d2031ea97b0"}
+[debug] [2025-10-07T13:17:39.591Z] <<< [apiv2][status] POST https://auth.firebase.tools/attest 200
+[debug] [2025-10-07T13:17:39.591Z] <<< [apiv2][body] POST https://auth.firebase.tools/attest {"token":"gFbfQcChBXce90b_GcxP_JJ8ujX70ByzViI5v55y8lc"}
+[info] 
+[info] To sign in to the Firebase CLI:
+[info] 
+[info] 1. Take note of your session ID:
+[info] 
+[info]    C34C9
+[info] 
+[info] 2. Visit the URL below on any device and follow the instructions to get your code:
+[info] 
+[info]    https://auth.firebase.tools/login?code_challenge=_aWd33mfNXR12gM8QoVcI6ctQsMkzkvr8OiN_teQzpM&session=c34c97bb-6588-4920-933f-9d2031ea97b0&attest=gFbfQcChBXce90b_GcxP_JJ8ujX70ByzViI5v55y8lc
+[info] 
+[info] 3. Paste or enter the authorization code below once you have it:
+[info] 
