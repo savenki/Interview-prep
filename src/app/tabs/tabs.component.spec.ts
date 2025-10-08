@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { TabsComponent } from './tabs.component';
 import { By } from '@angular/platform-browser';
@@ -59,31 +59,42 @@ describe('TabsComponent', () => {
   // expect(content).toContain('This is Profile Content'); // or whatever text appears in profile tab
 });
 
- it('should have settings content when active tab is settings', () => {
-  const buttonEls = fixture.debugElement.queryAll(By.css('button'));
-  const settingsButton = buttonEls.find(el => el.nativeElement.textContent.trim() === 'Settings');
-
-  expect(settingsButton).toBeDefined(); // Ensure the button exists
-
-  settingsButton?.nativeElement.click(); // Safe click with optional chaining
+ it('should show deferred settings content', fakeAsync(() => {
+  component.activeTabs.set('Settings');
   fixture.detectChanges();
-  expect(settingsButton!.nativeElement.classList.contains('active')).toBeTrue();
-  const content = fixture.nativeElement.textContent;
-  expect(content).toContain('This is Setting Content'); // or whatever text appears in profile tab
-});
-it('should apply ColorchangerDirective to paragraph', () => {
-    const directiveElements = fixture.debugElement.queryAll(By.directive(ColorchangerDirective));
-    expect(directiveElements.length).toBeGreaterThan(0);
-  });
 
-  it('should change color on mouseenter and mouseleave', () => {
-  const heading1 = fixture.debugElement.query(By.css('h2'));
-  const nativeEl = heading1.nativeElement;
+  tick(5000); // simulate 5 seconds
+  fixture.detectChanges();
+  expect(fixture.nativeElement.textContent).toContain('This is Setting Content');
+}));
 
-  heading1.triggerEventHandler('mouseenter', null);
-  expect(nativeEl.className).toContain('text-danger');
+it('should apply ColorchangerDirective to heading', fakeAsync(() => {
+  component.activeTabs.set('Home');
+  fixture.detectChanges();
+  tick(); // allow @defer to hydrate
+  fixture.detectChanges();
 
-  heading1.triggerEventHandler('mouseleave', null);
-  expect(nativeEl.className).toContain('text-dark')
-});
+  const directiveElements = fixture.debugElement.queryAll(By.directive(ColorchangerDirective));
+  expect(directiveElements.length).toBeGreaterThan(0);
+}));
+
+it('should change class on mouseenter and mouseleave', fakeAsync(() => {
+  component.activeTabs.set('Home');
+  fixture.detectChanges();
+  tick(); // allow @defer to hydrate
+  fixture.detectChanges();
+
+  const heading = fixture.debugElement.query(By.css('h2'));
+  expect(heading).toBeTruthy(); // ensure it's found
+
+  const nativeEl = heading.nativeElement;
+
+  heading.triggerEventHandler('mouseenter', null);
+  fixture.detectChanges();
+  expect(nativeEl.classList.contains('text-danger')).toBeTrue();
+
+  heading.triggerEventHandler('mouseleave', null);
+  fixture.detectChanges();
+  expect(nativeEl.classList.contains('text-dark')).toBeTrue();
+}));
 });

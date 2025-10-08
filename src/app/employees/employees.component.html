@@ -7,28 +7,19 @@
             type="text"
             class="form-control"
             placeholder="Search employee..."
-            (ngModelChange)="onSearchChange($event)"
-            [(ngModel)]="searchTerm"
+            [value]="searchTerm()"
+            (input)="onSearchChange($event)"
           />
-        </div>
-        <div class="col-md-3 text-md-start text-center">
-          <button
-            class="btn btn-primary w-100"
-            (click)="filterEmployee(searchTerm)"
-          >
-            <i class="fa fa-search me-2 text-light"></i>Search
-          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<ng-container *ngIf="filteredEmployeeList.length > 0">
-  <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let employee of filteredEmployeeList">
+<div class="row">
+  @for (employee of filteredEmployeeList(); track employee) {
+    <div class="col-md-4 mb-4">
       <div class="card h-100 border-0 shadow-lg rounded text-center">
-        <!-- Font Awesome Icon Instead of Image -->
         <div class="mt-4">
           <i class="fas fa-user fa-5x text-secondary"></i>
         </div>
@@ -46,9 +37,7 @@
         </div>
       </div>
     </div>
-  </div>
-</ng-container>
-
-<ng-container *ngIf="filteredEmployeeList.length <= 0">
-  <p class="text-center mt-3">No employee found</p>
-</ng-container>
+  } @empty {
+    <p class="text-center mt-3">No employee found</p>
+  }
+</div>
