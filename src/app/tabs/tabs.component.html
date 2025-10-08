@@ -1,5 +1,5 @@
 <div class="tabs">
-  @for (tab of ['Home', 'Profile', 'Settings']; track tab) {
+  @for (tab of ['Home', 'Profile', 'Notes']; track tab) {
     <button
       class="btn btn-info"
       [class.active]="activeTabs() === tab"
@@ -26,13 +26,9 @@
       <app-registration></app-registration>
     }
   }
-  @case ('Settings') {
-    @defer (on viewport; on timer(5s)) {
-      <h1>Welcome Setting</h1>
-      <p>This is Setting Content</p>
-    }
-    @placeholder {
-      <h1>Welcome Setting</h1>
-    }
-  }
+  @case ('Notes') {
+  
+    <h1>Welcome to Angular 17 Interview Preparation Notes</h1>
+    <app-markdown-viewer></app-markdown-viewer>
+}
 }

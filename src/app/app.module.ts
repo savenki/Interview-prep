@@ -14,6 +14,8 @@ import { FooterComponent } from './footer/footer.component';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { MarkdownViewerComponent } from "./markdown-viewer/markdown-viewer.component";
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,9 +32,10 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     ReactiveFormsModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
-
-  ],
+    AngularFirestoreModule,
+    MarkdownViewerComponent,
+    HttpClientModule
+],
   providers: [],
   bootstrap: [AppComponent],
 })

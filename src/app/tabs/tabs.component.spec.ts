@@ -8,6 +8,8 @@ import { ColorchangerDirective } from '../colorchanger.directive';
 import { RegistrationComponent } from '../registration/registration.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from '../footer/footer.component';
+import { MarkdownViewerComponent } from '../markdown-viewer/markdown-viewer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('TabsComponent', () => {
   let component: TabsComponent;
@@ -17,7 +19,7 @@ describe('TabsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TabsComponent,EmployeesComponent, // ✅ Declare it here
         SkillBadgePipe, ColorchangerDirective, RegistrationComponent,  FooterComponent],
-        imports: [ReactiveFormsModule, FormsModule]
+        imports: [ReactiveFormsModule, FormsModule, MarkdownViewerComponent, HttpClientModule]
     });
     fixture = TestBed.createComponent(TabsComponent);
     component = fixture.componentInstance;
@@ -33,17 +35,17 @@ describe('TabsComponent', () => {
   expect(tabButtonEls.length).toBe(3);
 
   const buttonTexts = tabButtonEls.map(el => el.nativeElement.textContent.trim());
-  expect(buttonTexts).toEqual(['Home', 'Profile', 'Settings']);
+  expect(buttonTexts).toEqual(['Home', 'Profile', 'Notes']);
 });
 
-  it('should have Home tab active', () => {
+  it('should have Notes tab active', () => {
   const buttonEls = fixture.debugElement.queryAll(By.css('button'));
-  const homeButton = buttonEls.find(
-    el => el.nativeElement.textContent.trim() === 'Home'
+  const notesButton = buttonEls.find(
+    el => el.nativeElement.textContent.trim() === 'Notes'
   );
 
-  expect(homeButton).toBeDefined();
-  expect(homeButton!.nativeElement.classList.contains('active')).toBeTrue();
+  expect(notesButton).toBeDefined();
+  expect(notesButton!.nativeElement.classList.contains('active')).toBeTrue();
 });
 
   it('should have profile content when active tab is profile', () => {
@@ -59,19 +61,16 @@ describe('TabsComponent', () => {
   // expect(content).toContain('This is Profile Content'); // or whatever text appears in profile tab
 });
 
- it('should show deferred settings content', fakeAsync(() => {
-  component.activeTabs.set('Settings');
+ it('should show deferred notes content', () => {
+  component.activeTabs.set('Notes');
   fixture.detectChanges();
-
-  tick(5000); // simulate 5 seconds
-  fixture.detectChanges();
-  expect(fixture.nativeElement.textContent).toContain('This is Setting Content');
-}));
+  expect(fixture.nativeElement.textContent).toContain('Welcome to Angular 17 Interview Preparation Notes');
+});
 
 it('should apply ColorchangerDirective to heading', fakeAsync(() => {
   component.activeTabs.set('Home');
   fixture.detectChanges();
-  tick(); // allow @defer to hydrate
+  tick(5000); // allow @defer to hydrate
   fixture.detectChanges();
 
   const directiveElements = fixture.debugElement.queryAll(By.directive(ColorchangerDirective));
@@ -81,7 +80,7 @@ it('should apply ColorchangerDirective to heading', fakeAsync(() => {
 it('should change class on mouseenter and mouseleave', fakeAsync(() => {
   component.activeTabs.set('Home');
   fixture.detectChanges();
-  tick(); // allow @defer to hydrate
+  tick(5000); // allow @defer to hydrate
   fixture.detectChanges();
 
   const heading = fixture.debugElement.query(By.css('h2'));
