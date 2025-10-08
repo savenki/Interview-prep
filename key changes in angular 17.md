@@ -38,9 +38,6 @@ Here’s a breakdown of the most notable changes:
 
 Angular 17 is a leap forward in making Angular more modern, performant, and developer-friendly. If you're upgrading, the new control flow and Signals are especially worth exploring.
 
-Let me know if you'd like help migrating your project or want code examples for these new features!
-
-
 Syntax for @If, @else, @elseIf
 
 <section>
