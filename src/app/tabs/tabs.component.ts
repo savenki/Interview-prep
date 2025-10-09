@@ -6,6 +6,5 @@ import { Component, signal } from '@angular/core';
   styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent {
-  activeTabs = signal<string>('Home');
-idle: any;
+  activeTabs = signal<string>('Notes');
 }

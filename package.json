@@ -21,6 +21,9 @@
     "@angular/router": "^17.3.12",
     "@fortawesome/fontawesome-free": "^7.0.1",
     "bootstrap": "^5.3.8",
+    "github-markdown-css": "^5.8.1",
+    "highlight.js": "^11.11.1",
+    "marked": "^16.4.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"

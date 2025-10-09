@@ -11,6 +11,10 @@
 - **Standalone Components**: No need for NgModules.
 - **Improved SSR & Hydration**: Better server-side rendering and client hydration.
 - **ESBuild Integration**: Faster builds and better performance.
+- **Video Recaps of Angular 17**: [Short video recaps of Angular 17 features](https://www.angulartraining.com/daily-newsletter/short-video-recaps-of-angular-17-features/)
+---
+
+Here’s the updated Markdown section with the link added to the **Signal-based components** explanation:
 
 ---
 
@@ -27,7 +31,8 @@ export class MyComponent {
   }
 }
 ```
-**Benefits**: Better performance, easier state management.
+**Benefits**: Better performance, easier state management.  
+**More about signals**: [Async Pipe, Signals, and Change Detection](https://www.angulartraining.com/daily-newsletter/async-pipe-signals-and-change-detection/)
 
 ---
 
