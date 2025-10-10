@@ -1,34 +1,93 @@
 <div class="tabs">
   @for (tab of ['Home', 'Profile', 'Notes']; track tab) {
-    <button
-      class="btn btn-info"
-      [class.active]="activeTabs() === tab"
-      (click)="activeTabs.set(tab)"
-    >
-      {{ tab }}
-    </button>
+  <button
+    class="btn btn-info"
+    [class.active]="activeTabs() === tab"
+    (click)="activeTabs.set(tab)"
+  >
+    {{ tab }}
+  </button>
   }
 </div>
 
-@switch (activeTabs()) {
-  @case ('Home') {
-    @defer(on viewport; on timer(5s)) {
-      <h2 appColorchanger>Employee Details</h2>
-      <app-employees></app-employees>
+@switch (activeTabs()) { @case ('Home') { @defer(on viewport; on timer(5s)) {
+<h2 appColorchanger>Employee Details</h2>
+<app-employees></app-employees>
+} @placeholder {
+<h2 appColorchanger>Employee Details</h2>
+} } @case ('Profile') { @defer (on idle) {
+<h1>Welcome To Profile</h1>
+<app-registration></app-registration>
+} }@case ('Notes') {
+<div class="row">
+  <!-- Sidebar -->
+  <div
+    class="col-12 col-md-4 mb-3 mb-md-0"
+    style="position: sticky; top: 80px; max-height: 100vh; overflow-y: auto"
+  >
+    <div class="list-group">
+      @for (notes of noteList; track notes) {
+      <button
+        class="list-group-item list-group-item-action"
+        [class.active]="selectedNote() === notes"
+        (click)="selectedNote.set(notes)"
+      >
+        <i class="fas fa-book-open me-2 text-primary"></i> {{ notes.title }}
+      </button>
+      }
+    </div>
+  </div>
+
+  <!-- Markdown Viewer -->
+  <div class="col-12 col-md-8">
+    @if (selectedNote() && selectedNote()?.path) {
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#" (click)="selectedNote.set(null)">
+            <i class="fas fa-sticky-note"></i> Notes
+          </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <i class="fas fa-file-alt"></i> {{ selectedNote()?.title }}
+        </li>
+      </ol>
+    </nav>
+
+    <p class="text-muted mb-3">
+      <i class="fas fa-info-circle me-1"></i> {{ selectedNote()?.description }}
+    </p>
+
+    <div
+      style="
+        max-height: calc(100vh - 220px);
+        overflow-y: auto;
+        border: 1px solid #dee2e6;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 0.5rem;
+        width: 100%;
+      "
+    >
+      <div #markdownContainer class="fullscreen-wrapper">
+        <button
+          class="btn btn-sm btn-outline-dark float-end"
+          (click)="toggleFullscreen()"
+        >
+          <i class="fas fa-expand"></i> Fullscreen
+        </button>
+        <div class="markdown-scroll">
+ <app-markdown-viewer 
+          [markdownFileName]="selectedNote()!.path"
+          [attr.key]="selectedNote()!.path"
+        ></app-markdown-viewer>
+        </div>
+       
+      </div>
+    </div>
+    } @else {
+    <p class="text-muted">Select a note to view its content.</p>
     }
-    @placeholder {
-      <h2 appColorchanger>Employee Details</h2>
-    }
-  }
-  @case ('Profile') {
-    @defer (on idle) {
-      <h1>Welcome To Profile</h1>
-      <app-registration></app-registration>
-    }
-  }
-  @case ('Notes') {
-  
-    <h1>Welcome to Angular 17 Interview Preparation Notes</h1>
-    <app-markdown-viewer></app-markdown-viewer>
-}
-}
+  </div>
+</div>
+}}
