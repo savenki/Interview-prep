@@ -14,6 +14,7 @@ export class TabsComponent {
   activeTabs = signal<string>('Notes');
   selectedNote = signal<Note | null>(notesDetails[0]);
   noteList = JSON.parse(JSON.stringify(notesDetails));
+  isFullScreen: boolean = false;
 
   @ViewChild('markdownContainer') markdownContainer!: ElementRef;
 
@@ -23,9 +24,11 @@ toggleFullscreen(): void {
   if (document.fullscreenElement) {
     document.exitFullscreen();
     elem.classList.remove('fullscreen-active');
+    this.isFullScreen = !this.isFullScreen;
   } else {
     elem.requestFullscreen();
     elem.classList.add('fullscreen-active');
+    this.isFullScreen = !this.isFullScreen;
   }
 }
 
