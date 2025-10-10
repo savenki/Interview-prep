@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 
@@ -8,10 +8,11 @@ import hljs from 'highlight.js';
   standalone: true,
   imports: [],
   templateUrl: './markdown-viewer.component.html',
-  styleUrls: ['./markdown-viewer.component.scss'] // ✅ corrected from styleUrl to styleUrls
+  styleUrls: ['./markdown-viewer.component.scss']
 })
-export class MarkdownViewerComponent implements OnInit {
-  markdownContent: string | Promise<string> = '';
+export class MarkdownViewerComponent implements OnInit, OnChanges {
+  markdownContent: string| Promise<string>= '';
+  @Input() markdownFileName: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -26,9 +27,21 @@ export class MarkdownViewerComponent implements OnInit {
       }
     });
 
-    this.http.get('assets/interview-prep-notes.md', { responseType: 'text' })
-      .subscribe(data => {
-        this.markdownContent = marked.parse(data);
-      });
+    this.loadMarkdown();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['markdownFileName'] && !changes['markdownFileName'].firstChange) {
+      this.loadMarkdown();
+    }
+  }
+
+  private loadMarkdown(): void {
+    if (this.markdownFileName) {
+      this.http.get(this.markdownFileName, { responseType: 'text' })
+        .subscribe(data => {
+          this.markdownContent = marked.parse(data);
+        });
+    }
   }
 }

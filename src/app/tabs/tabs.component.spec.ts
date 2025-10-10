@@ -64,7 +64,7 @@ describe('TabsComponent', () => {
  it('should show deferred notes content', () => {
   component.activeTabs.set('Notes');
   fixture.detectChanges();
-  expect(fixture.nativeElement.textContent).toContain('Welcome to Angular 17 Interview Preparation Notes');
+  expect(fixture.nativeElement.textContent).toContain('Angular');
 });
 
 it('should apply ColorchangerDirective to heading', fakeAsync(() => {

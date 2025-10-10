@@ -3,7 +3,11 @@
   justify-content: center;
   gap: 20px;
   margin-bottom: 20px;
-  top:10px;
+  position: sticky;
+  top: 10px;
+  z-index: 10;
+  background-color: #fff;
+  padding-top: 10px;
 }
 
 .tabs > button {
@@ -26,4 +30,59 @@
   border-bottom: 2px solid #007bff;
   color: #007bff;
   font-weight: bold;
+}
+
+/* Wrapper for markdown viewer */
+.fullscreen-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: #fff;
+}
+
+/* Default markdown scroll area */
+.markdown-scroll {
+  height: auto;
+  overflow-y: auto;
+  padding: 2rem 1.5rem;
+  line-height: 1.8;
+  font-size: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .markdown-scroll {
+    padding: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+}
+
+/* Fullscreen mode */
+.fullscreen-wrapper.fullscreen-active {
+  width: 100vw;
+  height: 100vh;
+  padding: 2rem;
+  background-color: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Markdown scroll inside fullscreen */
+.fullscreen-wrapper.fullscreen-active .markdown-scroll {
+  flex: 1;
+  overflow-y: auto;
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  line-height: 1.8;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
