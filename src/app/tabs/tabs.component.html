@@ -74,7 +74,7 @@
           class="btn btn-sm btn-outline-dark float-end"
           (click)="toggleFullscreen()"
         >
-          <i class="fas fa-expand"></i> Fullscreen
+          <i class="fas fa-expand"></i> {{isFullScreen ? 'Exit Fullscreen' : 'Fullscreen'}}
         </button>
         <div class="markdown-scroll">
  <app-markdown-viewer 
