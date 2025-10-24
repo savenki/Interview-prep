@@ -11,12 +11,12 @@ export class ColorchangerDirective {
   }
 
   @HostListener('mouseleave') onMouseLeave() {
-    this.changeColor('text-dark'); // Reset class
+    this.changeColor('text-success'); // Reset class
   }
 
   private changeColor(className: string) {
     const el = this.elementRef.nativeElement;
-    el.classList.remove('text-info', 'text-dark', 'text-primary', 'text-danger'); // remove known classes
+    el.classList.remove('text-info', 'text-success', 'text-primary', 'text-danger'); // remove known classes
     el.classList.add(className);
   }
 }

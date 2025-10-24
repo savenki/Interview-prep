@@ -11,7 +11,7 @@ interface Note {
   styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent {
-  activeTabs = signal<string>('Notes');
+  activeTabs = signal<string>('Home');
   selectedNote = signal<Note | null>(notesDetails[0]);
   noteList = JSON.parse(JSON.stringify(notesDetails));
   isFullScreen: boolean = false;

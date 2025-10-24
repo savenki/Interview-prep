@@ -1,0 +1,18 @@
+<h2 appColorchanger class="text-success">Available Notes</h2>
+<div class="row">
+  @for (note of noteList; track note) {
+    <div class="col-md-4 mb-3">
+      <div class="card h-100 shadow">
+        <div class="card-body">
+          <h5 class="card-title">{{ note.title }}</h5>
+          <p class="card-text">{{ note.description }}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-center">
+            <button class="btn btn-success" (click)="selectNote(note)">
+            View Note
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

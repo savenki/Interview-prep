@@ -149,6 +149,109 @@
 
 ---
 
+Perfect! Here's a **Spring Boot microservice example** that uses `CompletableFuture.allOf()` to make parallel REST calls and aggregate the results—just like `forkJoin` in RxJS.
+
+---
+
+### 🛠️ Scenario: Aggregating Data from Multiple Microservices
+
+Imagine a service that fetches user profile, order history, and recommendations from three separate microservices.
+
+---
+
+### 📦 Maven Dependencies
+Make sure you have these in your `pom.xml`:
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+---
+
+### 🧩 Service Layer Using `CompletableFuture`
+
+```java
+@Service
+public class AggregationService {
+
+    @Async
+    public CompletableFuture<String> getUserProfile(String userId) {
+        // Simulate REST call
+        return CompletableFuture.supplyAsync(() -> "Profile for " + userId);
+    }
+
+    @Async
+    public CompletableFuture<String> getOrderHistory(String userId) {
+        return CompletableFuture.supplyAsync(() -> "Orders for " + userId);
+    }
+
+    @Async
+    public CompletableFuture<String> getRecommendations(String userId) {
+        return CompletableFuture.supplyAsync(() -> "Recommendations for " + userId);
+    }
+
+    public String aggregateUserData(String userId) throws Exception {
+        CompletableFuture<String> profile = getUserProfile(userId);
+        CompletableFuture<String> orders = getOrderHistory(userId);
+        CompletableFuture<String> recommendations = getRecommendations(userId);
+
+        CompletableFuture.allOf(profile, orders, recommendations).join();
+
+        return profile.get() + "\n" + orders.get() + "\n" + recommendations.get();
+    }
+}
+```
+
+---
+
+### 🌐 REST Controller
+
+```java
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private AggregationService aggregationService;
+
+    @GetMapping("/{userId}/summary")
+    public ResponseEntity<String> getUserSummary(@PathVariable String userId) throws Exception {
+        String result = aggregationService.aggregateUserData(userId);
+        return ResponseEntity.ok(result);
+    }
+}
+```
+
+---
+
+### 🧪 Sample Output
+
+Calling `GET /user/123/summary` might return:
+```
+Profile for 123
+Orders for 123
+Recommendations for 123
+```
+
+---
+
+### 🔄 RxJS `forkJoin` Equivalent
+
+In Angular or Node.js:
+```typescript
+forkJoin({
+  profile: http.get('/profile/123'),
+  orders: http.get('/orders/123'),
+  recommendations: http.get('/recommendations/123')
+}).subscribe(result => {
+  console.log(result.profile, result.orders, result.recommendations);
+});
+```
+
+---
+
 **Sources**: 
 
 - [A2ZJavaInterviewprep](https://www.a2zjavainterviewprep.com/2023/11/top-20-microservices-interview.html)

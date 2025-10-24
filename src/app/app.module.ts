@@ -16,6 +16,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { MarkdownViewerComponent } from "./markdown-viewer/markdown-viewer.component";
 import { HttpClientModule } from '@angular/common/http';
+import {HomeComponent} from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     SkillBadgePipe,
     RegistrationComponent,
     FooterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

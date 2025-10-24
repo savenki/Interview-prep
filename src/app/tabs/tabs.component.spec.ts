@@ -38,10 +38,10 @@ describe('TabsComponent', () => {
   expect(buttonTexts).toEqual(['Home', 'Profile', 'Notes']);
 });
 
-  it('should have Notes tab active', () => {
+  it('should have Home tab active', () => {
   const buttonEls = fixture.debugElement.queryAll(By.css('button'));
   const notesButton = buttonEls.find(
-    el => el.nativeElement.textContent.trim() === 'Notes'
+    el => el.nativeElement.textContent.trim() === 'Home'
   );
 
   expect(notesButton).toBeDefined();

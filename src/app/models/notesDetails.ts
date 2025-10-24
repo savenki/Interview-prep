@@ -12,4 +12,9 @@ export const notesDetails = [{
     title: 'Spring Boot Microservices Interview Guide',
     path: 'assets/spring-microservices.md',
     description: "Here's a complete interview-ready guide on Spring Boot Microservices, covering all major topics including communication, deployment, scaling, and tuning. This includes commonly asked questions and detailed answers to help you ace technical interviews."
+},
+{
+    title: 'Java Collection Cheat Sheet',
+    path: 'assets/Lists.md',
+    description: "Here's a complete interview-ready guide on Java Collection Cheat Sheet, detailed answers to help you ace technical interviews."
 }]
