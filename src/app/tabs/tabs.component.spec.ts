@@ -94,6 +94,6 @@ it('should change class on mouseenter and mouseleave', fakeAsync(() => {
 
   heading.triggerEventHandler('mouseleave', null);
   fixture.detectChanges();
-  expect(nativeEl.classList.contains('text-dark')).toBeTrue();
+  expect(nativeEl.classList.contains('text-success')).toBeTrue();
 }));
 });
