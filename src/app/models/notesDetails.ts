@@ -17,4 +17,13 @@ export const notesDetails = [{
     title: 'Java Collection Cheat Sheet',
     path: 'assets/Lists.md',
     description: "Here's a complete interview-ready guide on Java Collection Cheat Sheet, detailed answers to help you ace technical interviews."
+},
+{
+    title:'Python Frameworks Interview Guide',
+    path:'assets/python.md',
+    description: "Here’s a complete interview-ready guide covering Python frameworks, including key questions, answers, and hands-on programming challenges for each major framework."
+},{
+    title:'Deep Dive into Python & Build Chat App',
+    path:'assets/chat_python.md',
+    description: "Here’s a complete deep dive guide on building a chat application using Python frameworks, including architecture, technologies, step-by-step implementation, and interview-ready notes."
 }]
