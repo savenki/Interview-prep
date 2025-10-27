@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from '../footer/footer.component';
 import { MarkdownViewerComponent } from '../markdown-viewer/markdown-viewer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from '../home/home.component';
 
 describe('TabsComponent', () => {
   let component: TabsComponent;
@@ -17,8 +18,8 @@ describe('TabsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TabsComponent,EmployeesComponent, // ✅ Declare it here
-        SkillBadgePipe, ColorchangerDirective, RegistrationComponent,  FooterComponent],
+      declarations: [TabsComponent,EmployeesComponent,
+        SkillBadgePipe, ColorchangerDirective, RegistrationComponent,  FooterComponent, HomeComponent],
         imports: [ReactiveFormsModule, FormsModule, MarkdownViewerComponent, HttpClientModule]
     });
     fixture = TestBed.createComponent(TabsComponent);

@@ -1,7 +1,9 @@
+
 .tabs {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 20px;
   position: sticky;
   top: 10px;
@@ -32,15 +34,6 @@
   font-weight: bold;
 }
 
-/* Wrapper for markdown viewer */
-.fullscreen-wrapper {
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-  background-color: #fff;
-}
-
-/* Default markdown scroll area */
 .markdown-scroll {
   height: auto;
   overflow-y: auto;
@@ -52,37 +45,73 @@
   box-sizing: border-box;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
+  .tabs > button {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    flex: 1 1 auto;
+    min-width: 80px;
+  }
+
   .markdown-scroll {
     padding: 1rem;
     font-size: 0.95rem;
     line-height: 1.6;
     max-width: 100%;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  .note-container {
+    padding: 0 1rem;
+    word-break: break-word;
   }
 }
 
-/* Fullscreen mode */
-.fullscreen-wrapper.fullscreen-active {
-  width: 100vw;
-  height: 100vh;
-  padding: 2rem;
-  background-color: #fff;
-  overflow: hidden;
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  animation: pulse 2s infinite;
 }
 
-/* Markdown scroll inside fullscreen */
-.fullscreen-wrapper.fullscreen-active .markdown-scroll {
-  flex: 1;
-  overflow-y: auto;
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
-  line-height: 1.8;
-  font-size: 1rem;
-  box-sizing: border-box;
+.fab:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

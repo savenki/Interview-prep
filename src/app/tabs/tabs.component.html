@@ -1,35 +1,52 @@
-<div class="tabs">
-  @for (tab of ['Home', 'Profile', 'Notes']; track tab) {
+<div class="tabs text-center mb-3">
   <button
-    class="btn btn-info"
-    [class.active]="activeTabs() === tab"
-    (click)="activeTabs.set(tab)"
+    class="btn btn-info mx-1"
+    [class.active]="activeTabs() === 'Home'"
+    (click)="activeTabs.set('Home')"
   >
-    {{ tab }}
+    Home
   </button>
-  }
+  <button
+    class="btn btn-info mx-1"
+    [class.active]="activeTabs() === 'Profile'"
+    (click)="activeTabs.set('Profile')"
+  >
+    Profile
+  </button>
+  <button
+    class="btn btn-info mx-1"
+    [class.active]="activeTabs() === 'Notes'"
+    (click)="activeTabs.set('Notes')"
+  >
+    Notes
+  </button>
 </div>
 
-@switch (activeTabs()) { @case ('Home') { @defer(on viewport; on timer(5s)) {
-<app-home
+<div *ngIf="activeTabs() === 'Home'">
+  <app-home
     [noteList]="noteList"
     [selectedNote]="selectedNote"
     [activeTabs]="activeTabs"
   ></app-home>
+</div>
 
-} @placeholder {
-<h2 appColorchanger>Notes Details</h2>
-} } @case ('Profile') { @defer (on idle) {
-<h1>Welcome To Profile</h1>
-<app-registration></app-registration>
-} }@case ('Notes') {
-  <div class="row">
-    <div class="col-12">
-      @if (selectedNote() && selectedNote()?.path) {
+<div *ngIf="activeTabs() === 'Profile'">
+  <h1>Welcome To Profile</h1>
+  <app-registration></app-registration>
+</div>
+
+<div *ngIf="activeTabs() === 'Notes'">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10">
+      <ng-container *ngIf="selectedNote() && selectedNote()?.path; else noNote">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="#" (click)="selectedNote.set(null); activeTabs.set('Home')" class="bg-light text-danger">
+              <a
+                href="#"
+                (click)="selectedNote.set(null); activeTabs.set('Home')"
+                class="text-danger"
+              >
                 <i class="fas fa-arrow-left"></i> Back to Notes
               </a>
             </li>
@@ -39,40 +56,33 @@
           </ol>
         </nav>
 
-        <p class="mb-3 bg-light text-warning font-weight-bold">
-          <i class="fas fa-info-circle me-1"></i> {{ selectedNote()?.description }}
+        <p class="mb-3 text-warning fw-bold">
+          <i class="fas fa-info-circle me-1"></i>
+          {{ selectedNote()?.description }}
         </p>
 
-        <div
-          style="
-            max-height: calc(100vh - 220px);
-            overflow-y: auto;
-            border: 1px solid #dee2e6;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 0.5rem;
-            width: 100%;
-          "
-        >
-          <div #markdownContainer class="fullscreen-wrapper">
-            <button
-              class="btn btn-sm btn-outline-dark float-end"
-              (click)="toggleFullscreen()"
-            >
-              <i class="fas fa-expand"></i>
-              {{ isFullScreen ? 'Exit Fullscreen' : 'Fullscreen' }}
-            </button>
-            <div class="markdown-scroll">
-              <app-markdown-viewer
-                [markdownFileName]="selectedNote()!.path"
-                [attr.key]="selectedNote()!.path"
-              ></app-markdown-viewer>
-            </div>
+        <div class="note-container">
+          <div #markdownContainer class="markdown-scroll">
+            <app-markdown-viewer
+              [markdownFileName]="selectedNote()!.path"
+              [attr.key]="selectedNote()!.path"
+            ></app-markdown-viewer>
           </div>
         </div>
-      } @else {
-        <p class="text-muted">No note selected. Go to Home tab to choose one.</p>
-      }
+
+        <button
+          class="fab"
+          (click)="toggleFullscreen()"
+          aria-label="Toggle Fullscreen"
+        >
+          <i class="fas fa-expand"></i>
+        </button>
+      </ng-container>
+      <ng-template #noNote>
+        <p class="text-muted">
+          No note selected. Go to Home tab to choose one.
+        </p>
+      </ng-template>
     </div>
   </div>
-}}
+</div>
