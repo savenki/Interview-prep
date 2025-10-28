@@ -1,0 +1,20 @@
+.form-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 2rem;
+  flex-wrap: wrap;
+}
+
+.form-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.divider {
+  width: 2px;
+  background-color: #ccc;
+  height: auto;
+  align-self: stretch;
+}

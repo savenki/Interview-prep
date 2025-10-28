@@ -1,77 +1,113 @@
-<div class="container mt-4">
-  <div class="card shadow">
-    <div class="card-header">
-      <h4>Registration Form</h4>
+<div class="form-wrapper">
+  <!-- Registration Form -->
+  <div class="form-section">
+    <div class="card shadow">
+      <div class="card-header">
+        <h4>Registration Form</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="registrationForm" (ngSubmit)="onRegister()" novalidate>
+
+          <!-- Name -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" id="name" class="form-control" formControlName="name">
+            <div *ngIf="registrationForm.get('name')?.touched && registrationForm.get('name')?.invalid" class="text-danger mt-1">
+              <div *ngIf="registrationForm.get('name')?.errors?.['required']">Name is required.</div>
+              <div *ngIf="registrationForm.get('name')?.errors?.['maxlength']">Max 25 characters allowed.</div>
+            </div>
+          </div>
+
+          <!-- Age -->
+          <div class="mb-3">
+            <label for="age" class="form-label">Age:</label>
+            <input type="number" id="age" class="form-control" formControlName="age">
+            <div *ngIf="registrationForm.get('age')?.touched && registrationForm.get('age')?.invalid" class="text-danger mt-1">
+              <div *ngIf="registrationForm.get('age')?.errors?.['required']">Age is required.</div>
+              <div *ngIf="registrationForm.get('age')?.errors?.['min']">Age must be at least 1.</div>
+              <div *ngIf="registrationForm.get('age')?.errors?.['max']">Age cannot exceed 120.</div>
+            </div>
+          </div>
+
+          <!-- Gender -->
+          <div class="mb-3">
+            <label class="form-label d-block">Gender:</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="male" value="male" formControlName="gender">
+              <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="female" value="female" formControlName="gender">
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="other" value="other" formControlName="gender">
+              <label class="form-check-label" for="other">Other</label>
+            </div>
+            <div *ngIf="registrationForm.get('gender')?.touched && registrationForm.get('gender')?.invalid" class="text-danger mt-1">
+              Gender is required.
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" class="form-control" formControlName="email">
+            <div *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid" class="text-danger mt-1">
+              <div *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="registrationForm.get('email')?.errors?.['email']">Invalid email format.</div>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" id="password" class="form-control" formControlName="password">
+            <div *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid" class="text-danger mt-1">
+              Password is required.
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success" [disabled]="registrationForm.invalid">Register</button>
+        </form>
+      </div>
     </div>
-    <div class="card-body">
-      <form [formGroup]="registrationForm" novalidate>
+  </div>
 
-        <!-- Name -->
-        <div class="mb-3">
-          <label for="name" class="form-label">Name:</label>
-          <input type="text" id="name" class="form-control" formControlName="name">
-          <div *ngIf="registrationForm.get('name')?.touched && registrationForm.get('name')?.invalid" class="text-danger mt-1">
-            <div *ngIf="registrationForm.get('name')?.errors?.['required']">Name is required.</div>
-            <div *ngIf="registrationForm.get('name')?.errors?.['maxlength']">Name cannot exceed 25 characters.</div>
-          </div>
-        </div>
+  <!-- Divider -->
+  <div class="divider"></div>
 
-        <!-- Age -->
-        <div class="mb-3">
-          <label for="age" class="form-label">Age:</label>
-          <input type="number" id="age" class="form-control" formControlName="age">
-          <div *ngIf="registrationForm.get('age')?.touched && registrationForm.get('age')?.invalid" class="text-danger mt-1">
-            <div *ngIf="registrationForm.get('age')?.errors?.['required']">Age is required.</div>
-            <div *ngIf="registrationForm.get('age')?.errors?.['pattern']">Age must be a number.</div>
-            <div *ngIf="registrationForm.get('age')?.errors?.['max']">Age cannot exceed 120.</div>
-            <div *ngIf="registrationForm.get('age')?.errors?.['min']">Age cannot be negative.</div>
-          </div>
-        </div>
+  <!-- Login Form -->
+  <div class="form-section">
+    <div class="card shadow">
+      <div class="card-header">
+        <h4>Login</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" novalidate>
 
-        <!-- Gender -->
-        <div class="mb-3">
-          <label class="form-label d-block">Gender:</label>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="male" value="male" formControlName="gender">
-            <label class="form-check-label" for="male">Male</label>
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label">Email:</label>
+            <input type="email" id="loginEmail" class="form-control" formControlName="email">
+            <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="text-danger mt-1">
+              <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</div>
+            </div>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="female" value="female" formControlName="gender">
-            <label class="form-check-label" for="female">Female</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="other" value="other" formControlName="gender">
-            <label class="form-check-label" for="other">Other</label>
-          </div>
-          <div *ngIf="registrationForm.get('gender')?.touched && registrationForm.get('gender')?.invalid" class="text-danger mt-1">
-            Gender is required.
-          </div>
-        </div>
 
-        <!-- Email -->
-        <div class="mb-3">
-          <label for="email" class="form-label">Email:</label>
-          <input type="email" id="email" class="form-control" formControlName="email">
-          <div *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid" class="text-danger mt-1">
-            <div *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</div>
-            <div *ngIf="registrationForm.get('email')?.errors?.['email']">Enter a valid email address.</div>
+          <!-- Password -->
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">Password:</label>
+            <input type="password" id="loginPassword" class="form-control" formControlName="password">
+            <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-danger mt-1">
+              Password is required.
+            </div>
           </div>
-        </div>
 
-        <!-- Password -->
-        <div class="mb-3">
-          <label for="password" class="form-label">Password:</label>
-          <input type="password" id="password" class="form-control" formControlName="password">
-          <div *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid" class="text-danger mt-1">
-            Password is required.
-          </div>
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">
-          Register
-        </button>
-      </form>
+          <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

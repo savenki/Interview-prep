@@ -58,8 +58,9 @@ describe('TabsComponent', () => {
   profileButton?.nativeElement.click(); // Safe click with optional chaining
   fixture.detectChanges();
   expect(profileButton!.nativeElement.classList.contains('active')).toBeTrue();
-  // const content = fixture.nativeElement.textContent;
-  // expect(content).toContain('This is Profile Content'); // or whatever text appears in profile tab
+   const content = fixture.nativeElement.textContent;
+  expect(content).toContain('Registration Form'); 
+   expect(content).toContain('Login');
 });
 
  it('should show deferred notes content', () => {
