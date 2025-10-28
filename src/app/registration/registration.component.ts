@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-registration',
@@ -6,6 +6,7 @@ import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit {
+  @Output() backClick: EventEmitter<string> = new EventEmitter<string>();
   registrationForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.maxLength(25)]],
     age: ['', [Validators.required, Validators.min(1), Validators.max(120)]],
@@ -31,4 +32,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   onLogin() {}
+
+  onBackClick() {
+    this.backClick.emit('Home');
+  }
 }

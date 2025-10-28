@@ -18,3 +18,18 @@
   height: auto;
   align-self: stretch;
 }
+
+.btn-outline-success {
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+
+  &:hover {
+    background-color: #198754;
+    color: #fff;
+    transform: translateX(-2px);
+  }
+
+  i {
+    font-size: 1rem;
+  }
+}

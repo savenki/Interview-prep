@@ -31,7 +31,7 @@
 </div>
 
 <div *ngIf="activeTabs() === 'Profile'">
-  <app-registration></app-registration>
+  <app-registration (backClick)="onBackClick($event)"></app-registration>
 </div>
 
 <div *ngIf="activeTabs() === 'Notes'">
